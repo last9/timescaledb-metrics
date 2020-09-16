@@ -11,7 +11,7 @@ We advise not to pass credentials in configurations, but via Environment or Inst
 `env AWS_DEFAULT_REGION="ap-south-1" CLOUDWATCH_NAMESPACE="timescaledb-dev" DATABASE_URL="postgres://dbuser:4c77c8b8-a9e1-c2cd32feaeeb@10.29.152.230:5432/db" ./timescaledb-metrics`
 
 ## Output
-
+![Cloudwatch](cloudwatch.png)
 
 # Motivation
 

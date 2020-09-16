@@ -1,5 +1,5 @@
 # timescaledb-metrics
-Send metrics for policies and other things
+Send [TimescaleDB](https://github.com/timescale/timescaledb) [policy stats](https://docs.timescale.com/latest/api#timescaledb_information-policy_stats) (and other things) as metrics. 
 
 # timescaledb-metrics
 Send metrics for policies and other things
@@ -26,7 +26,7 @@ Example of such Jobs are:
 
  etc.
 
-Example of the stats that can be pulled from TimescaleDB tables
+Example of the stats that can be pulled from TimescaleDB tables.
 
 ```
 | entity_name            | job_type             | last_start_on | last_success_on | total_failures |
@@ -42,8 +42,11 @@ Example of the stats that can be pulled from TimescaleDB tables
 | sli_violations_archive | drop_chunks          | 1600248501    | 1600248501      | 0              |
 ```
 
-Keeping a manual eye on these is painful and tedious, and by emitting these as metrics we can keep an eye on if things go wrong and how and when.
-While some may argue that the interval of these jobs is not as periodic where they qualify to be a metric system, but in most cases as the usage increases the policies end up running every 5 minutes and alerts on slopes can catch staleness pretty effectively.
+Keeping a manual eye on these is painful and tedious, and by emitting these as metrics we can be alerted when things go wrong.
+
+While some may argue that the interval of these jobs is not as periodic where they qualify to be a metric system, but as the usage increases these policies end up running closer to every 5 minutes. Alerts on such slopes can catch staleness pretty effectively.
+
+Another problem with the default [policy_stats](https://docs.timescale.com/latest/api#timescaledb_information-policy_stats) is that the job_id is hardly human readable. It's tough to keep a track of an IntegerID since it changes, on any recreation. But that's a minor win.
 
 # Components
 

@@ -1,0 +1,9 @@
+{"entity":"sli_300","job_type":"drop_chunks","last_start":1600244728,"last_success":1600244728,"total_fail":0}
+{"entity":"custom_sli_archive","job_type":"reorder","last_start":1600195293,"last_success":1600195293,"total_fail":0}
+{"entity":"custom_sli_archive","job_type":"compress_chunks","last_start":1600162096,"last_success":1600162096,"total_fail":0}
+{"entity":"custom_sli_archive","job_type":"drop_chunks","last_start":1600241297,"last_success":1600241297,"total_fail":0}
+{"entity":"sli_archive","job_type":"reorder","last_start":1600195323,"last_success":1600195323,"total_fail":0}
+{"entity":"sli_300","job_type":"continuous_aggregate","last_start":1600244763,"last_success":1600244763,"total_fail":0}
+{"entity":"sli_archive","job_type":"drop_chunks","last_start":1600241297,"last_success":1600241297,"total_fail":0}
+{"entity":"sli_archive","job_type":"compress_chunks","last_start":1600171382,"last_success":1600171382,"total_fail":0}
+{"entity":"sli_violations_archive","job_type":"drop_chunks","last_start":1600162101,"last_success":1600162101,"total_fail":0}

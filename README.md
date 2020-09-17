@@ -51,7 +51,7 @@ Only timescaleDB.
 
 ## Considerations
 
-  - As of now we output to Cloudwatch but it can surely be extended to other meric sources.
+  - As of now we output to Cloudwatch but it can surely be extended to other metric sources.
   If you want more metric sources, send a Pull Request or just open a new Issue.
 
   - The reason to not use go-metrics, is the overall lack of precision of timestamps which Cloudwatch is excellent at.

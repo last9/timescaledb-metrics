@@ -55,3 +55,14 @@ Only timescaleDB.
   If you want more metric sources, send a Pull Request or just open a new Issue.
 
   - The reason to not use go-metrics, is the overall lack of precision of timestamps which Cloudwatch is excellent at.
+
+## Prometheus Exporter
+
+You can export timescale db metrics to Prometheus by setting the path of this [file](./postgres_exporter/queries.yaml) as an environment variable which the [postgres-exporter](https://github.com/wrouesnel/postgres_exporter) recognizes by default.
+
+`export PG_EXPORTER_EXTEND_QUERY_PATH=<path_to_queries.yaml>`
+
+Or you can just add this to your existing custom `queries.yaml`
+
+References: https://github.com/wrouesnel/postgres_exporter#adding-new-metrics-via-a-config-file
+

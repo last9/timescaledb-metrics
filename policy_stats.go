@@ -8,6 +8,7 @@ import (
 )
 
 const query = `SELECT
+current_database() AS dbname,
 COALESCE(CA.view_name, CAS.view_name, PS.hypertable) AS entity_name,
 job_type,
 EXTRACT(EPOCH FROM PS.last_start)::int as last_start_on,
@@ -20,6 +21,7 @@ LEFT JOIN timescaledb_information.continuous_aggregate_stats CAS
 ON PS.job_id = CAS.job_id;`
 
 type record struct {
+	Database    string `json:"database"`
 	Entity      string `json:"entity"`
 	JobType     string `json:"job_type"`
 	LastStart   int    `json:"last_start"`
@@ -29,6 +31,7 @@ type record struct {
 
 func recordTags(r *record) map[string]string {
 	return map[string]string{
+		"database": r.Database,
 		"entity":   r.Entity,
 		"job_type": r.JobType,
 	}
@@ -52,7 +55,8 @@ func policyMetrics(conn *pgx.Conn, tm Telemeter) error {
 
 	for rows.Next() {
 		if err := rows.Scan(
-			&rec.Entity, &rec.JobType, &rec.LastStart, &rec.LastSuccess, &rec.TotalFail,
+			&rec.Database, &rec.Entity, &rec.JobType,
+			&rec.LastStart, &rec.LastSuccess, &rec.TotalFail,
 		); err != nil {
 			log.Println(err)
 			break

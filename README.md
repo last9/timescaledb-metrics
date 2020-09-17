@@ -1,8 +1,5 @@
 # timescaledb-metrics
-Send [TimescaleDB](https://github.com/timescale/timescaledb) [policy stats](https://docs.timescale.com/latest/api#timescaledb_information-policy_stats) (and other things) as metrics. 
-
-# timescaledb-metrics
-Send metrics for policies and other things
+Send [TimescaleDB](https://github.com/timescale/timescaledb) [policy stats](https://docs.timescale.com/latest/api#timescaledb_information-policy_stats) (and other things) as metrics.
 
 # Usage
 

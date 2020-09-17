@@ -1,6 +1,8 @@
 package main
 
-import "github.com/jackc/pgx"
+import (
+	"github.com/jackc/pgx"
+)
 
 func dbConn(dbURL string) (*pgx.Conn, error) {
 	var cfg pgx.ConnConfig

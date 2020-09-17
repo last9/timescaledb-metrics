@@ -1,0 +1,22 @@
+timescaledb_policy_stats:
+  query: "SELECT current_database() AS dbname, COALESCE(CA.view_name, CAS.view_name, PS.hypertable) AS entity_name, job_type, EXTRACT(EPOCH FROM PS.last_start)::int as last_start_on, EXTRACT(EPOCH FROM PS.last_successful_finish)::int as last_success_on, PS.total_failures FROM timescaledb_information.policy_stats PS LEFT JOIN timescaledb_information.continuous_aggregates CA ON PS.hypertable = CA.materialization_hypertable LEFT JOIN timescaledb_information.continuous_aggregate_stats CAS ON PS.job_id = CAS.job_id;"
+  master: true
+  metrics:
+    - dbname:
+        usage: "LABEL"
+        description: "Name of the current database"
+    - entity_name:
+        usage: "LABEL"
+        description: "Name of this table"
+    - job_type:
+        usage: "LABEL"
+        description: "Name of the job type"
+    - last_start_on:
+        usage: "GAUGE"
+        description: "Last time at which the job started for this table in seconds"
+    - last_success_on:
+        usage: "GAUGE"
+        description: "Last time at which the job successfully ran for this table in seconds"
+    - total_failures:
+        usage: "COUNTER"
+        description: "Number of times the job failed to run for this table"

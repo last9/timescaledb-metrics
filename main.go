@@ -11,7 +11,7 @@ import (
 	"github.com/jinzhu/configor"
 )
 
-const VERSION = "0.0.1"
+const VERSION = "0.0.2"
 
 var Config = struct {
 	DB struct {

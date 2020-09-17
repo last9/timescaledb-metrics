@@ -21,7 +21,7 @@ jobs:
       run: go test -v ./...
 
     - name: Build timescale metrics for linux x86_64
-      run: env GOOS=linux GARCH=amd64 CGO_ENABLED=0 go build  -o timescaledb_metrics_linux_x86_64 -installsuffix cgo github.com/last9/timescaledb-metrics/:
+      run: env GOOS=linux GARCH=amd64 CGO_ENABLED=0 go build  -o timescaledb_metrics_linux_x86_64 -installsuffix cgo github.com/last9/timescaledb-metrics/
      
   release:
     name: timescaledb-metrics

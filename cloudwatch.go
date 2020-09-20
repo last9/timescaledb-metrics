@@ -10,9 +10,9 @@ import (
 	"github.com/aws/aws-sdk-go/service/cloudwatch"
 )
 
-var BATCH_LEN = 20
+var batchLen = 20
 
-type CloudwatchCfg struct {
+type cloudwatchCfg struct {
 	Namespace string
 	Region    string
 	AccessKey string
@@ -21,11 +21,11 @@ type CloudwatchCfg struct {
 
 type cloudwatchClient struct {
 	sync.Mutex
-	cfg     *CloudwatchCfg
+	cfg     *cloudwatchCfg
 	metrics []*Metric
 }
 
-func NewCloudwatchClient(cfg *CloudwatchCfg) TelemetrySender {
+func newCloudwatchClient(cfg *cloudwatchCfg) TelemetrySender {
 	client := &cloudwatchClient{}
 	client.cfg = cfg
 	client.metrics = []*Metric{}
@@ -81,7 +81,7 @@ func datumBatches(in []*Metric) [][]*cloudwatch.MetricDatum {
 	batch := []*cloudwatch.MetricDatum{}
 
 	for _, m := range in {
-		if len(batch) == BATCH_LEN {
+		if len(batch) == batchLen {
 			batches = append(batches, batch)
 			batch = []*cloudwatch.MetricDatum{}
 		}

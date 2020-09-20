@@ -8,7 +8,7 @@ import (
 
 func TestCloudWatch(t *testing.T) {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	c := NewCloudwatchClient(&CloudwatchCfg{
+	c := newCloudwatchClient(&cloudwatchCfg{
 		Namespace: "ok",
 		Region:    "test",
 		AccessKey: "hello",
@@ -23,7 +23,7 @@ func TestCloudWatch(t *testing.T) {
 	})
 
 	t.Run("Batch length should match", func(t *testing.T) {
-		BATCH_LEN = 10
+		batchLen = 10
 		b := datumBatches(m)
 		if len(b) != 3 {
 			t.Fatal("Length of metric batch does not match")

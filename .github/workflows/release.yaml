@@ -28,8 +28,8 @@ jobs:
     if: contains(github.ref, 'release')
     steps:
     - name: Get the release tag
-      run: echo "::set-env name=VERSION::$(./timescaledb_metrics_linux_x86_64 -v | awk '{print $NF}')"
-
+      run: echo "::set-env name=VERSION::$(echo ${{ github.ref }} | rev | cut -d '/' -f1 | rev)"
+    
     - name: Build timescale metrics for linux x86_64
       run: env GOOS=linux GARCH=amd64 CGO_ENABLED=0 go build -ldflags="-X 'main.VERSION=v${{ env.VERSION }}'" -o timescaledb_metrics_linux_x86_64 -installsuffix cgo github.com/last9/timescaledb-metrics/
 

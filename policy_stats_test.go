@@ -54,7 +54,7 @@ func mockPolicyEmitter(conn *pgx.Conn, tm Telemeter) error {
 func TestEmitter(t *testing.T) {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 
-	registerEmitter(emitterFunc(mockPolicyEmitter))
+	registerEmitter(mockPolicyEmitter)
 
 	mt := &mockTelemetry{}
 	process(nil, mt)

@@ -11,11 +11,13 @@ import (
 	"github.com/jinzhu/configor"
 )
 
+// VERSION no. of the binary. To be set using ldflags during build time.
 var VERSION = "0.0.3"
 
+// Config is set using an external YAML, JSON, Toml file
 var Config = struct {
 	DB struct {
-		Url string `required:"true" env:"DATABASE_URL"`
+		URL string `required:"true" env:"DATABASE_URL"`
 	}
 
 	Cloudwatch struct {
@@ -50,21 +52,21 @@ func main() {
 		configor.Load(&Config, *config)
 	}
 
-	conn, err := dbConn(Config.DB.Url)
+	conn, err := dbConn(Config.DB.URL)
 	if err != nil {
 		log.Fatalf("Unable to connect to database: %v\n", err)
 	}
 
 	defer conn.Close()
 
-	cw := NewCloudwatchClient(&CloudwatchCfg{
+	cw := newCloudwatchClient(&cloudwatchCfg{
 		Namespace: Config.Cloudwatch.Namespace,
 		Region:    Config.Cloudwatch.Region,
 		AccessKey: Config.Cloudwatch.AccessKey,
 		SecretKey: Config.Cloudwatch.SecretKey,
 	})
 
-	registerEmitter(emitterFunc(policyMetrics))
+	registerEmitter(policyMetrics)
 	process(conn, cw)
 }
 

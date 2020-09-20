@@ -5,9 +5,6 @@ RUN=$1
 FLAGS=$2
 
 set +ex
-mod_download() {
-  go mod download
-}
 
 check_errcheck() {
   errcheck ${FLAGS} ./...
@@ -58,7 +55,6 @@ case ${RUN} in
 		check_lint
 		;;
 	"sec" )
-		mod_download
 		check_sec
 		;;
 	"shadow" )
@@ -71,7 +67,6 @@ case ${RUN} in
 		check_vet
 		;;
 	* )
-    mod_download
     check_imports
     check_fmt
     check_lint
